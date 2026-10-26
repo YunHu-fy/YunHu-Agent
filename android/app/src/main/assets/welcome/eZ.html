@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <style>html,body,#animation{width:100%;height:100%;margin:0;padding:0;overflow:hidden;background:transparent}#animation canvas{display:block;width:100%!important;height:100%!important}</style>
+</head>
+<body>
+  <div id="animation" aria-hidden="true"></div>
+  <script src="lottie.min.js"></script>
+  <script>
+    (function () {
+      var player = null;
+      var desiredMotion = false;
+      var reducedMotion = false;
+      var container = document.getElementById('animation');
+      function setMotion(enabled, reduced) {
+        desiredMotion = !!enabled;
+        reducedMotion = !!reduced;
+        if (!player || !player.isLoaded) return;
+        if (reducedMotion) { player.pause(); player.goToAndStop(Math.floor(player.totalFrames * 0.28), true); }
+        else if (desiredMotion) player.play();
+        else player.pause();
+      }
+      window.setWelcomeMotion = setMotion;
+      var resizePending = false;
+      function resizeArtwork() {
+        if (resizePending) return;
+        resizePending = true;
+        requestAnimationFrame(function () {
+          resizePending = false;
+          if (player && player.isLoaded && container.clientWidth && container.clientHeight) player.resize();
+        });
+      }
+      window.resizeWelcomeArtwork = resizeArtwork;
+      window.addEventListener("resize", resizeArtwork);
+      if (window.ResizeObserver) new ResizeObserver(resizeArtwork).observe(container);
+      player = lottie.loadAnimation({
+        container: container,
+        renderer: 'canvas',
+        loop: true,
+        autoplay: false,
+        path: 'eZ.json',
+        rendererSettings: { preserveAspectRatio: 'xMidYMid meet', clearCanvas: true, progressiveLoad: false }
+      });
+      // Nested precompositions become visible late in eZ; load all layers up front.
+      player.addEventListener('DOMLoaded', function () {
+        resizeArtwork();
+        if (!desiredMotion) player.goToAndStop(Math.floor(player.totalFrames * 0.28), true);
+        setMotion(desiredMotion, reducedMotion);
+      });
+    }());
+  </script>
+</body>
+</html>

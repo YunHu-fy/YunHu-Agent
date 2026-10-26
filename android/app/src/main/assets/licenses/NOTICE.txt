@@ -1,0 +1,24 @@
+云琥 Yunhu 1.3.4 — GPL-3.0-only fork. Not an official Termux release.
+
+Lottie Web 5.12.2: MIT, https://github.com/airbnb/lottie-web
+
+Terminal emulator, terminal view and JNI source: termux/termux-app v0.118.3
+Commit: 5b657c6adf4304e5198951ce815fe0205dcac29c
+Source URL: https://github.com/termux/termux-app/tree/v0.118.3
+Archive: https://codeload.github.com/termux/termux-app/zip/refs/tags/v0.118.3
+Source archive SHA256: debd53a911c30f578c5b3600e5609a22b576491b20ce632e155457596ee1d291
+Upstream license: GPL-3.0-only; inherited Android Terminal Emulator code retains Apache-2.0 notices. All upstream source notices are retained.
+
+Pinned official binary donor (never installed separately):
+https://github.com/termux/termux-app/releases/download/v0.118.3/termux-app_v0.118.3%2Bgithub-debug_arm64-v8a.apk
+Published checksums: https://github.com/termux/termux-app/releases/download/v0.118.3/termux-app_v0.118.3%2Bgithub-debug_sha256sums
+APK SHA256: 72fdb596045116bf5ba1b5bdf5b26fddb9acc0bd074ad9f2da9eb0ae85e83a4e
+libtermux.so SHA256: 41fad4b73caa033dc4b3de113f743efbd0039af6889ae7dd40ecb739fef17242
+Embedded bootstrap ZIP SHA256: c8d702b6f742935001c37cda81b8ac69504a95d5cf28f2899532dd8cd4b057eb
+The bootstrap ZIP was extracted without modification from the ELF blob in libtermux-bootstrap.so. It includes per-package licenses, copyright and dpkg version metadata; installed under $PREFIX/share/LICENSES, $PREFIX/share/doc and $PREFIX/var/lib/dpkg/status. The official second stage configures these bundled packages; deployment performs no package downloads. Additional pkg/apt installation is only triggered by explicit commands.
+
+Corresponding app source is supplied in the project alongside this APK, including unmodified upstream terminal-emulator JNI C and build files, fork Kotlin/Gradle sources and extraction/verification scripts. Redistributors must accompany binaries with complete corresponding source (including corresponding bootstrap package sources), or their own legally valid GPL written offer. Upstream package build recipes/source references: https://github.com/termux/termux-packages . An upstream URL alone does not replace a distributor's GPL obligations. See repository THIRD_PARTY_NOTICES for release conditions.
+
+Compatibility: ARM64, Android API29..36, primary Android user only. Application ID com.termux is required by official executable paths. targetSdk28 intentionally permits private-directory execution on Android10+. This is not a Play target35 application. Existing official Termux cannot coexist, and a different signing certificate prevents replacement. The app never uninstalls an existing package or overwrites an unidentified prefix. Back up your data before any manual uninstall or data reset.
+
+No su request occurs until explicit Root configuration. Shizuku/system commands use official UserService; shell UID cannot enter the private Termux prefix. Commands are general and not sandboxed. SELinux, Android permissions and vendor policies remain in effect. Wake/Wi-Fi locks and battery optimization guidance are opt-in; no SELinux or battery policy is automatically changed.

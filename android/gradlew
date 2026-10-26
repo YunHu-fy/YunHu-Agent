@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Text-only launcher: reuse cached Gradle 8.13, or explicitly bootstrap it.
+set -euo pipefail
+project_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+gradle_version=8.13
+gradle_sha256=20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78
+gradle_user_dir="${GRADLE_USER_HOME:-$HOME/.gradle}"
+gradle_executable=""
+for candidate in "$gradle_user_dir/wrapper/dists/gradle-$gradle_version-bin/"*/"gradle-$gradle_version/bin/gradle" "$project_dir/.bootstrap/gradle-$gradle_version/bin/gradle"; do
+    if [ -f "$candidate" ]; then gradle_executable="$candidate"; break; fi
+done
+if [ "${1:-}" = --bootstrap ]; then
+    shift
+    if [ -z "$gradle_executable" ]; then
+        mkdir -p "$project_dir/.bootstrap"
+        archive="$project_dir/.bootstrap/gradle-$gradle_version-bin.zip"
+        if [ ! -f "$archive" ]; then
+            curl --fail --location --output "$archive" "https://downloads.gradle.org/distributions/gradle-$gradle_version-bin.zip"
+        fi
+        if command -v sha256sum >/dev/null 2>&1; then
+            printf '%s  %s\n' "$gradle_sha256" "$archive" | sha256sum --check -
+        else
+            printf '%s  %s\n' "$gradle_sha256" "$archive" | shasum -a 256 --check -
+        fi
+        unzip -q -o "$archive" -d "$project_dir/.bootstrap"
+        gradle_executable="$project_dir/.bootstrap/gradle-$gradle_version/bin/gradle"
+    fi
+fi
+if [ -z "$gradle_executable" ]; then
+    printf '%s\n' 'Gradle 8.13 is not cached. Use bash gradlew --bootstrap to fetch its checksum-verified official distribution.' >&2
+    exit 1
+fi
+if [ "$#" -eq 0 ]; then set -- :app:assembleDebug :app:lintDebug --console=plain --no-daemon; fi
+exec bash "$gradle_executable" --project-dir "$project_dir" "$@"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">云琥</string>
+    <string name="notification_channel">云琥本地服务</string>
+    <string name="notification_channel_description">显示用户启动的本地 Python 服务及停止操作</string>
+    <string name="notification_starting">正在启动本地服务…</string>
+    <string name="notification_running">本地服务运行中，点按返回界面</string>
+    <string name="notification_stop">停止服务</string>
+</resources>

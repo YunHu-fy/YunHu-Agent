@@ -1,0 +1,34 @@
+__pycache__/
+*.py[cod]
+.venv/
+# 只忽略仓库根目录下的运行时数据，避免误伤 Java 包路径如 com/termux/shared/data/
+/data/
+workspace/*
+!workspace/欢迎.txt
+android/.gradle/
+android/**/build/
+android/local.properties
+# Termux 官方 APK 下载缓存：由 vendor/termux/extract.ps1 按 PROVENANCE.json 的 SHA-256 重新获取
+android/vendor/termux/downloads/
+dist/
+*.log
+.test-tools/
+artifacts/
+
+# AI 工具本地工作目录（私有记忆，勿上传）
+.workbuddy/
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+.vscode/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 环境变量与私钥
+.env
+*.pem
+*.key

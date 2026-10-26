@@ -1,0 +1,36 @@
+{
+  "termux_version": "0.118.3",
+  "source_tag": "v0.118.3",
+  "source_commit": "5b657c6adf4304e5198951ce815fe0205dcac29c",
+  "source_url": "https://github.com/termux/termux-app/tree/v0.118.3",
+  "source_archive_url": "https://codeload.github.com/termux/termux-app/zip/refs/tags/v0.118.3",
+  "source_archive_sha256": "debd53a911c30f578c5b3600e5609a22b576491b20ce632e155457596ee1d291",
+  "apk_url": "https://github.com/termux/termux-app/releases/download/v0.118.3/termux-app_v0.118.3%2Bgithub-debug_arm64-v8a.apk",
+  "apk_sha256": "72fdb596045116bf5ba1b5bdf5b26fddb9acc0bd074ad9f2da9eb0ae85e83a4e",
+  "checksums_url": "https://github.com/termux/termux-app/releases/download/v0.118.3/termux-app_v0.118.3%2Bgithub-debug_sha256sums",
+  "checksums_sha256": "16f93b78ddea9fd06df4b5ddf25a5f7fcde69b35ccc658288684a12b44deac6e",
+  "abi": "arm64-v8a",
+  "files": [
+    {
+      "path": "app/src/main/jniLibs/arm64-v8a/libtermux.so",
+      "sha256": "41fad4b73caa033dc4b3de113f743efbd0039af6889ae7dd40ecb739fef17242",
+      "from": "lib/arm64-v8a/libtermux.so"
+    },
+    {
+      "path": "app/src/main/assets/termux/bootstrap-aarch64.zip",
+      "sha256": "c8d702b6f742935001c37cda81b8ac69504a95d5cf28f2899532dd8cd4b057eb",
+      "from": "ZIP blob in lib/arm64-v8a/libtermux-bootstrap.so"
+    }
+  ],
+  "bootstrap_release": "2025.03.28-r1+apt-android-7",
+  "bootstrap_url": "https://github.com/termux/termux-packages/releases/download/bootstrap-2025.03.28-r1%2Bapt-android-7/bootstrap-aarch64.zip",
+  "bootstrap_hash_also_pinned_by": "source/termux-app-0.118.3/app/build.gradle:199",
+  "source_modules": [
+    "terminal-emulator/src/main/java",
+    "terminal-emulator/src/main/jni",
+    "terminal-view/src/main/java",
+    "terminal-view/src/main/res"
+  ],
+  "modifications": "Upstream sources unmodified. Fork integration and build files live outside the upstream source tree.",
+  "license": "GPL-3.0-only with upstream Apache-2.0 exceptions"
+}

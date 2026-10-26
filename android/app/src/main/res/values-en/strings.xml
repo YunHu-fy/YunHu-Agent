@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">云琥</string>
+    <string name="notification_channel">Yunhu local service</string>
+    <string name="notification_channel_description">Shows the local Python service you started and a stop action</string>
+    <string name="notification_starting">Starting local service…</string>
+    <string name="notification_running">Local service running. Tap to return.</string>
+    <string name="notification_stop">Stop service</string>
+</resources>
